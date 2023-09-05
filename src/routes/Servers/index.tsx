@@ -1,23 +1,13 @@
-import { useGetServersData } from "@/api/useGetServersData";
-import { useCallback, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Table } from "./Table";
+import { Loader } from "@/components";
+import { useQueryServers } from "./hooks";
 
 export const ServersPage = () => {
-  const navigate = useNavigate();
+  const { isLoading, error, data } = useQueryServers();
 
-  const onUnauthorised = useCallback(() => {
-    window.localStorage.removeItem("user");
-    navigate("/login");
-  }, []);
+  if (isLoading) return <Loader />;
 
-  const [data, getServersData] = useGetServersData({
-    onUnauthorised,
-  });
-
-  useEffect(() => {
-    getServersData?.();
-  }, []);
+  if (error) return "An error has occurred: " + (error as Error).message;
 
   return <div className="w-96">{data && <Table data={data} />}</div>;
 };
