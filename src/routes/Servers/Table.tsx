@@ -66,7 +66,7 @@ export const Table = <T extends Record<string, unknown>>({
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm font-light">
-              <thead className="border-b font-medium dark:border-neutral-500">
+              <thead className="border-b font-medium">
                 <tr className="cursor-pointer">
                   {keys.map((key, index) => (
                     <th
@@ -99,7 +99,7 @@ export const Table = <T extends Record<string, unknown>>({
               </thead>
               <tbody>
                 {sortedData.map((element, index) => (
-                  <tr className="border-b dark:border-neutral-500" key={index}>
+                  <tr className="border-b" key={index}>
                     {keys.map((key) => (
                       <td className="whitespace-nowrap px-6 py-4" key={key}>
                         {element[key] as React.ReactNode}
