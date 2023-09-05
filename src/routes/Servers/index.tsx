@@ -1,6 +1,7 @@
 import { useGetServersData } from "@/api/useGetServersData";
 import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Table } from "./Table";
 
 export const ServersPage = () => {
   const navigate = useNavigate();
@@ -18,18 +19,5 @@ export const ServersPage = () => {
     getServersData?.();
   }, []);
 
-  console.log("data:", data);
-
-  return (
-    <div>
-      {data?.map((element) => {
-        return (
-          <div>
-            <p>name: {element.name}</p>
-            <p>distance: {element.distance}</p>
-          </div>
-        );
-      })}
-    </div>
-  );
+  return <div>{data && <Table data={data} />}</div>;
 };
