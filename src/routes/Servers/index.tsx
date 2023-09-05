@@ -19,5 +19,5 @@ export const ServersPage = () => {
     getServersData?.();
   }, []);
 
-  return <div>{data && <Table data={data} />}</div>;
+  return <div className="w-96">{data && <Table data={data} />}</div>;
 };
