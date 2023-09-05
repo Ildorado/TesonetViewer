@@ -3,6 +3,7 @@ import { createContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "@/hooks";
 import { GetTokenDataType, UserType } from "@/types";
+import { apiCaller } from "./api";
 
 type ValueType = {
   user: UserType;
@@ -26,16 +27,11 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   const value: ValueType = useMemo(() => {
     const login = async (data: GetTokenDataType) => {
       try {
-        const response = await fetch(
-          "https://playground.tesonet.lt/v1/tokens",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-          }
-        );
-
-        const result = await response.json();
+        const result = await apiCaller({
+          type: "postToken",
+          params: data,
+          token: user?.token,
+        });
 
         setUser({ ...data, token: result?.token });
         navigate("/");
