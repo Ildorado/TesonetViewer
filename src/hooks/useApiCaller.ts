@@ -9,8 +9,10 @@ export const useApiCaller = () => {
     auth?.logout();
   }, [auth]);
 
-  const wrappedApiCaller: typeof apiCaller = parameters =>
-    apiCaller({ ...parameters, onUnauthorised, token: auth?.user.token });
+  const wrappedApiCaller: typeof apiCaller = useCallback(
+    parameters => apiCaller({ ...parameters, onUnauthorised, token: auth?.user.token }),
+    []
+  );
 
   return wrappedApiCaller;
 };

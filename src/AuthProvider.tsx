@@ -2,12 +2,12 @@ import React from "react";
 import { createContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "@/hooks";
-import { GetTokenDataType, UserType } from "@/types";
+import { ConfigType, PostTokenType } from "@/types";
 import { apiCaller } from "./api";
 
 type ValueType = {
-  user: UserType;
-  login: (data: GetTokenDataType) => Promise<{
+  user: ConfigType;
+  login: (data: PostTokenType) => Promise<{
     success: boolean;
   }>;
   logout: () => void;
@@ -19,25 +19,21 @@ interface IAuthProvider {
   children: React.ReactNode;
 }
 
-const userData = window.localStorage.getItem("user");
-
 export const AuthProvider = ({ children }: IAuthProvider) => {
-  const [user, setUser] = useLocalStorage("user", userData);
+  const [config, setConfig] = useLocalStorage("config", null);
   const navigate = useNavigate();
 
   // call this function when you want to authenticate the user
   const value: ValueType = useMemo(() => {
-    const login = async (data: GetTokenDataType) => {
+    const login = async (data: PostTokenType) => {
       try {
         const { result, success } = await apiCaller({
           type: "postToken",
           params: data,
-          token: user?.token,
-          onUnauthorised: () => {},
         });
 
         if (success) {
-          setUser({ ...data, token: result?.token });
+          setConfig({ token: result?.token });
           navigate("/");
           console.log("Success:", result);
           return { success };
@@ -52,15 +48,15 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
     // call this function to sign out logged in user
     const logout = () => {
-      setUser(null);
+      setConfig(null);
       navigate("/", { replace: true });
     };
 
     return {
-      user,
+      user: config,
       login,
       logout,
     };
-  }, [navigate, setUser, user]);
+  }, [navigate, setConfig]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

@@ -10,7 +10,7 @@ const data = [
 
 describe("Severs Page", () => {
   it("should show server page", () => {
-    cy.setUpLoggedInState({});
+    cy.setUpLoggedInState();
 
     cy.intercept("GET", "https://playground.tesonet.lt/v1/servers", {
       body: data,

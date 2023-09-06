@@ -1,4 +1,3 @@
-import "./App.css";
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 
 import { AuthLayout, LoginLayout, ProtectedLayout } from "@/components";

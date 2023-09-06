@@ -1,10 +1,3 @@
-export interface UserType {
-  username: string;
-  password: string;
+export interface ConfigType {
   token: string;
-}
-
-export interface GetTokenDataType {
-  username: string;
-  password: string;
 }

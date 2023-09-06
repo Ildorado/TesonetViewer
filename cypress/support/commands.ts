@@ -65,14 +65,8 @@ export const login = ({ username, password }: { username: string; password: stri
   cy.getBySel("login-submit").click();
 };
 
-const setUpLoggedInState = ({
-  username = "testUsername",
-  password = "testPassword",
-}: {
-  username?: string;
-  password?: string;
-}) => {
-  window.localStorage.setItem("user", JSON.stringify({ username, password, token: "test-token" }));
+const setUpLoggedInState = () => {
+  window.localStorage.setItem("config", JSON.stringify({ token: "test-token" }));
 };
 
 Cypress.Commands.add("getBySel", getBySel);

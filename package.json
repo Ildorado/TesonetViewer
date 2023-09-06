@@ -15,19 +15,14 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.33.0",
-    "@tanstack/react-query-devtools": "^4.33.0",
-    "auth0": "^3.7.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "localforage": "^1.10.0",
-    "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
-    "sort-by": "^1.2.0",
-    "styled-components": "^6.0.7",
     "vite-plugin-svgr": "^3.2.0"
   },
   "devDependencies": {
+    "eslint-plugin-prettier": "^5.0.0",
+    "@tanstack/react-query-devtools": "^4.33.0",
     "@tanstack/eslint-plugin-query": "^4.34.1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
