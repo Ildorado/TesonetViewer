@@ -61,7 +61,7 @@ export const Table = <T extends Record<string, unknown>>({
   };
 
   return (
-    <div className="flex flex-col overflow-x-auto">
+    <div className="flex flex-col overflow-x-auto" data-test="table">
       <div>
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <div className="overflow-x-auto">
@@ -70,6 +70,7 @@ export const Table = <T extends Record<string, unknown>>({
                 <tr className="cursor-pointer">
                   {keys.map((key, index) => (
                     <th
+                      data-test="table-header-column"
                       key={key}
                       scope="col"
                       className={`px-6 py-4 ${
@@ -99,9 +100,13 @@ export const Table = <T extends Record<string, unknown>>({
               </thead>
               <tbody>
                 {sortedData.map((element, index) => (
-                  <tr className="border-b" key={index}>
+                  <tr data-test="table-column" className="border-b" key={index}>
                     {keys.map((key) => (
-                      <td className="whitespace-nowrap px-6 py-4" key={key}>
+                      <td
+                        data-test={`table-${key}-cell`}
+                        className="whitespace-nowrap px-6 py-4"
+                        key={key}
+                      >
                         {element[key] as React.ReactNode}
                       </td>
                     ))}

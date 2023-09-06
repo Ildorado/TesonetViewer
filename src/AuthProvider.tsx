@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
           setUser({ ...data, token: result?.token });
           navigate("/");
           console.log("Success:", result);
-        }
+        }   
       } catch (error) {
         console.error("Error:", error);
       }

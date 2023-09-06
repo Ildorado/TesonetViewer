@@ -43,6 +43,7 @@ export const LoginPage = () => {
                   Username
                 </label>
                 <input
+                  data-test="login-username"
                   type="text"
                   name="username"
                   id="username"
@@ -59,6 +60,7 @@ export const LoginPage = () => {
                   Password
                 </label>
                 <input
+                  data-test="login-password"
                   type="password"
                   name="password"
                   id="password"
@@ -68,6 +70,7 @@ export const LoginPage = () => {
                 />
               </div>
               <button
+                data-test="login-submit"
                 type="submit"
                 className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >

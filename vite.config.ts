@@ -11,4 +11,8 @@ export default defineConfig({
       "@/": join(__dirname, "src/"),
     },
   },
+  server: {
+    host: true,
+    port: 3000,
+  },
 });
