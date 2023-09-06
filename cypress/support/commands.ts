@@ -18,7 +18,7 @@ declare global {
       getBySel: typeof getBySel;
       getBySelLike: typeof getBySelLike;
       login: typeof login;
-      validateSnapshot: (title: string) => void;
+      setUpLoggedInState: typeof setUpLoggedInState;
     }
   }
 }
@@ -58,19 +58,24 @@ const getBySelLike = (selector: string, ...args: any[]) => {
   return cy.get(`[data-test*=${selector}]`, ...args);
 };
 
-export const login = ({
-  username,
-  password,
-}: {
-  username: string;
-  password: string;
-}) => {
+export const login = ({ username, password }: { username: string; password: string }) => {
   cy.getBySel("login-username").type(username);
   cy.getBySel("login-password").type(password);
 
   cy.getBySel("login-submit").click();
 };
 
+const setUpLoggedInState = ({
+  username = "testUsername",
+  password = "testPassword",
+}: {
+  username?: string;
+  password?: string;
+}) => {
+  window.localStorage.setItem("user", JSON.stringify({ username, password, token: "test-token" }));
+};
+
 Cypress.Commands.add("getBySel", getBySel);
 Cypress.Commands.add("getBySelLike", getBySelLike);
 Cypress.Commands.add("login", login);
+Cypress.Commands.add("setUpLoggedInState", setUpLoggedInState);
