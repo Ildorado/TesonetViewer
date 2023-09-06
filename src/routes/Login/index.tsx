@@ -18,9 +18,16 @@ export const LoginPage = () => {
 
   const handleSubmit = async (event: React.FormEvent<YourFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
 
     setIsLoading(true);
+
+    const data = new FormData(form);
 
     const result = await auth?.login({
       username: data.get("username") as string | "",
@@ -55,6 +62,8 @@ export const LoginPage = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
                   placeholder="username"
                   required
+                  pattern=".{3,}" // At least 3 characters required
+                  title="Username must be at least 3 characters long"
                 />
               </div>
               <div>
@@ -69,6 +78,8 @@ export const LoginPage = () => {
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
                   required
+                  pattern=".{6,}" // At least 6 characters required
+                  title="Password must be at least 6 characters long"
                 />
               </div>
 
