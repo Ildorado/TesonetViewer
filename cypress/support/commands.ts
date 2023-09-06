@@ -14,10 +14,7 @@ declare global {
   namespace Cypress {
     interface Chainable {
       getBySel: typeof getBySel;
-      getBySelLike(
-        dataTestPrefixAttribute: string,
-        args?: any
-      ): Cypress.Chainable<JQuery<HTMLElement>>;
+      getBySelLike: typeof getBySelLike;
       login: typeof login;
       validateSnapshot: (title: string) => void;
     }
