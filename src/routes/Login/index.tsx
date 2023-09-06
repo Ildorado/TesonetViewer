@@ -1,4 +1,5 @@
 import { useAuth } from "@/hooks";
+import { useState } from "react";
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -11,15 +12,20 @@ interface YourFormElement extends HTMLFormElement {
 
 export const LoginPage = () => {
   const auth = useAuth();
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent<YourFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<YourFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    auth?.login({
+    const result = await auth?.login({
       username: data.get("username") as string | "",
       password: data.get("password") as string | "",
     });
+
+    if (result?.success === false) {
+      setShowErrorMessage(true);
+    }
   };
 
   return (
@@ -69,6 +75,15 @@ export const LoginPage = () => {
                   required
                 />
               </div>
+
+              <div
+                className={`text-red-500 text-sm mb-2 ${
+                  showErrorMessage ? "" : "invisible"
+                }`}
+              >
+                Login was not successful. Please check your credentials.
+              </div>
+
               <button
                 data-test="login-submit"
                 type="submit"

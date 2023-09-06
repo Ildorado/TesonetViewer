@@ -7,7 +7,9 @@ import { apiCaller } from "./api";
 
 type ValueType = {
   user: UserType;
-  login: (data: GetTokenDataType) => Promise<void>;
+  login: (data: GetTokenDataType) => Promise<{
+    success: boolean;
+  }>;
   logout: () => void;
 };
 
@@ -38,9 +40,13 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
           setUser({ ...data, token: result?.token });
           navigate("/");
           console.log("Success:", result);
-        }   
+          return { success };
+        } else {
+          return { success };
+        }
       } catch (error) {
         console.error("Error:", error);
+        return { success: false };
       }
     };
 
