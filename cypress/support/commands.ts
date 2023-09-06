@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /// <reference types="cypress" />
 // ***********************************************
 // This example commands.ts shows you how to
@@ -11,6 +12,7 @@
 //
 export {};
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     interface Chainable {
       getBySel: typeof getBySel;

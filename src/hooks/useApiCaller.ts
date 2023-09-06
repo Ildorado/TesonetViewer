@@ -7,7 +7,7 @@ export const useApiCaller = () => {
 
   const onUnauthorised = useCallback(() => {
     auth?.logout();
-  }, []);
+  }, [auth]);
 
   const wrappedApiCaller: typeof apiCaller = (parameters) =>
     apiCaller({ ...parameters, onUnauthorised, token: auth?.user.token });

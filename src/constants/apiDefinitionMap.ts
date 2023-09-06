@@ -2,6 +2,7 @@ import { apiMapType, apiRecord } from "@/types";
 
 export const API_DEFINITION_MAP: Record<
   keyof apiMapType,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (payload: any) => apiRecord
 > = {
   postToken: (payload: apiMapType["postToken"]["request"]) => ({

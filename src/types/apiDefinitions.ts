@@ -21,6 +21,6 @@ type HttpMethodType =
 export type apiRecord = {
   method: HttpMethodType;
   url: string;
-  payload: any;
+  payload: unknown;
   isSendingAuthToken?: boolean;
 };
