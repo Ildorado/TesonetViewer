@@ -9,6 +9,7 @@ export const useQueryServers = () => {
     queryFn: async () => {
       return await apiCaller({ type: "getServers", params: undefined });
     },
+    refetchOnWindowFocus: false,
   });
 
   return { isLoading, error, data };
