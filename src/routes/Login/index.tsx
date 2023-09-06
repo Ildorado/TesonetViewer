@@ -36,16 +36,9 @@ export const LoginPage = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Sign in to your account
             </h1>
-            <form
-              className="space-y-4 md:space-y-6"
-              action="#"
-              onSubmit={handleSubmit}
-            >
+            <form className="space-y-4 md:space-y-6" action="#" onSubmit={handleSubmit}>
               <div>
-                <label
-                  htmlFor="username"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
+                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">
                   Username
                 </label>
                 <input
@@ -59,10 +52,7 @@ export const LoginPage = () => {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
+                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">
                   Password
                 </label>
                 <input
@@ -76,11 +66,7 @@ export const LoginPage = () => {
                 />
               </div>
 
-              <div
-                className={`text-red-500 text-sm mb-2 ${
-                  showErrorMessage ? "" : "invisible"
-                }`}
-              >
+              <div className={`text-red-500 text-sm mb-2 ${showErrorMessage ? "" : "invisible"}`}>
                 Login was not successful. Please check your credentials.
               </div>
 

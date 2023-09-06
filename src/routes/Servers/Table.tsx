@@ -4,9 +4,7 @@ interface ITable<T> {
   data: T[];
 }
 
-export const Table = <T extends Record<string, unknown>>({
-  data,
-}: ITable<T>) => {
+export const Table = <T extends Record<string, unknown>>({ data }: ITable<T>) => {
   const [sortConfig, setSortConfig] = useState<{
     key: string | null;
     direction: "asc" | "desc" | null;
@@ -73,9 +71,9 @@ export const Table = <T extends Record<string, unknown>>({
                       data-test="table-header-column"
                       key={key}
                       scope="col"
-                      className={`px-6 py-4 ${
-                        sortConfig.key === key ? "text-blue-500" : ""
-                      } ${index === keys.length - 1 ? "fixed-width" : ""}`}
+                      className={`px-6 py-4 ${sortConfig.key === key ? "text-blue-500" : ""} ${
+                        index === keys.length - 1 ? "fixed-width" : ""
+                      }`}
                       onClick={() => requestSort(key)}
                     >
                       <div className="flex items-center">
@@ -83,9 +81,7 @@ export const Table = <T extends Record<string, unknown>>({
                         {sortConfig.key === key ? (
                           <span
                             className={`${
-                              sortConfig.direction === "asc"
-                                ? "text-green-500"
-                                : "text-red-500"
+                              sortConfig.direction === "asc" ? "text-green-500" : "text-red-500"
                             }`}
                           >
                             {sortConfig.direction === "asc" ? "▲" : "▼"}
@@ -101,7 +97,7 @@ export const Table = <T extends Record<string, unknown>>({
               <tbody>
                 {sortedData.map((element, index) => (
                   <tr data-test="table-column" className="border-b" key={index}>
-                    {keys.map((key) => (
+                    {keys.map(key => (
                       <td
                         data-test={`table-${key}-cell`}
                         className="whitespace-nowrap px-6 py-4"

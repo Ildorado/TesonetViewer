@@ -15,12 +15,7 @@ export const apiCaller = async <CallType extends keyof apiMapType>({
   result?: apiMapType[CallType]["response"];
   success: boolean;
 }> => {
-  const {
-    method,
-    url,
-    payload,
-    isSendingAuthToken = true,
-  } = API_DEFINITION_MAP[type](params);
+  const { method, url, payload, isSendingAuthToken = true } = API_DEFINITION_MAP[type](params);
 
   const headers: Record<string, string> = {
     "Content-Type": "application/json",

@@ -14,7 +14,7 @@ export const ProtectedLayout = () => {
     return <Navigate to="/login" />;
   }
   return (
-    <div className="pt-8" >
+    <div className="pt-8">
       <Header />
       {outlet}
     </div>

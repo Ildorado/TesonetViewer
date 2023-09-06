@@ -33,46 +33,32 @@ describe("<Table />", () => {
   });
 
   it("displays ascending order correctly", () => {
-    const sortedByDistanceAscdending = [...data].sort(
-      (a, b) => a.distance - b.distance
-    );
+    const sortedByDistanceAscdending = [...data].sort((a, b) => a.distance - b.distance);
 
     cy.mount(<Table data={data} />);
 
     cy.getBySel("table-header-column").contains("distance").click();
 
-    cy.getBySel("table-distance-cell")
-      .first()
-      .contains(sortedByDistanceAscdending[0].distance);
+    cy.getBySel("table-distance-cell").first().contains(sortedByDistanceAscdending[0].distance);
 
     cy.getBySel("table-distance-cell")
       .last()
-      .contains(
-        sortedByDistanceAscdending[sortedByDistanceAscdending.length - 1]
-          .distance
-      );
+      .contains(sortedByDistanceAscdending[sortedByDistanceAscdending.length - 1].distance);
   });
 
   it("displays descdending order correctly", () => {
-    const sortedByDistanceDesdending = [...data].sort(
-      (a, b) => b.distance - a.distance
-    );
+    const sortedByDistanceDesdending = [...data].sort((a, b) => b.distance - a.distance);
 
     cy.mount(<Table data={data} />);
 
     cy.getBySel("table-header-column").contains("distance").click();
     cy.getBySel("table-header-column").contains("distance").click();
 
-    cy.getBySel("table-distance-cell")
-      .first()
-      .contains(sortedByDistanceDesdending[0].distance);
+    cy.getBySel("table-distance-cell").first().contains(sortedByDistanceDesdending[0].distance);
 
     cy.getBySel("table-distance-cell")
       .last()
-      .contains(
-        sortedByDistanceDesdending[sortedByDistanceDesdending.length - 1]
-          .distance
-      );
+      .contains(sortedByDistanceDesdending[sortedByDistanceDesdending.length - 1].distance);
   });
 
   it("displays normal order on three clicks", () => {

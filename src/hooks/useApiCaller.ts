@@ -9,7 +9,7 @@ export const useApiCaller = () => {
     auth?.logout();
   }, [auth]);
 
-  const wrappedApiCaller: typeof apiCaller = (parameters) =>
+  const wrappedApiCaller: typeof apiCaller = parameters =>
     apiCaller({ ...parameters, onUnauthorised, token: auth?.user.token });
 
   return wrappedApiCaller;
