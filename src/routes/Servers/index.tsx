@@ -9,5 +9,7 @@ export const ServersPage = () => {
 
   if (error) return "An error has occurred: " + (error as Error).message;
 
-  return <div className="w-96">{data && <Table data={data} />}</div>;
+  return (
+    <div className="w-96">{data?.result && <Table data={data.result} />}</div>
+  );
 };

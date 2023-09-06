@@ -27,15 +27,18 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   const value: ValueType = useMemo(() => {
     const login = async (data: GetTokenDataType) => {
       try {
-        const result = await apiCaller({
+        const { result, success } = await apiCaller({
           type: "postToken",
           params: data,
           token: user?.token,
+          onUnauthorised: () => {},
         });
 
-        setUser({ ...data, token: result?.token });
-        navigate("/");
-        console.log("Success:", result);
+        if (success) {
+          setUser({ ...data, token: result?.token });
+          navigate("/");
+          console.log("Success:", result);
+        }
       } catch (error) {
         console.error("Error:", error);
       }

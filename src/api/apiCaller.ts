@@ -11,7 +11,10 @@ export const apiCaller = async <CallType extends keyof apiMapType>({
   params: apiMapType[CallType]["request"];
   onUnauthorised?: () => void;
   token?: string;
-}) => {
+}): Promise<{
+  result?: apiMapType[CallType]["response"];
+  success: boolean;
+}> => {
   const {
     method,
     url,
@@ -27,7 +30,7 @@ export const apiCaller = async <CallType extends keyof apiMapType>({
     if (token) {
       headers.Authorization = `Bearer ${token}`;
     } else {
-      return;
+      return { success: false };
     }
   }
 
@@ -40,14 +43,15 @@ export const apiCaller = async <CallType extends keyof apiMapType>({
 
     if (response.status === 401) {
       onUnauthorised?.();
-      return;
+      return { success: false };
     }
 
     const result = await response.json();
     console.log("Success:", result);
 
-    return result;
+    return { result, success: true };
   } catch (error) {
     console.error("Error:", error);
+    return { success: false };
   }
 };
