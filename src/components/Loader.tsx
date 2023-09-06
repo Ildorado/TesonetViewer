@@ -14,7 +14,8 @@ const Container = styled.div`
   }
 `;
 
-const StyledLoader = styled(LoaderSvg)`
+const StyledLoader = styled(LoaderSvg)<ILoader>`
+  height: ${({ height }) => height || "3rem"};
   animation: spin 1s linear infinite;
 
   @keyframes spin {
@@ -25,6 +26,9 @@ const StyledLoader = styled(LoaderSvg)`
   }
 `;
 
-export const Loader = () => {
-  return <Container>{<StyledLoader />}</Container>;
+interface ILoader {
+  height?: string;
+}
+export const Loader = ({ height }: ILoader) => {
+  return <Container>{<StyledLoader height={height} />}</Container>;
 };

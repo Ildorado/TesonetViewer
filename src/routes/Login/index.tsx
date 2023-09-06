@@ -1,3 +1,4 @@
+import { Loader } from "@/components";
 import { useAuth } from "@/hooks";
 import { useState } from "react";
 
@@ -13,15 +14,20 @@ interface YourFormElement extends HTMLFormElement {
 export const LoginPage = () => {
   const auth = useAuth();
   const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<YourFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
+    setIsLoading(true);
+
     const result = await auth?.login({
       username: data.get("username") as string | "",
       password: data.get("password") as string | "",
     });
+
+    setIsLoading(false);
 
     if (result?.success === false) {
       setShowErrorMessage(true);
@@ -73,9 +79,10 @@ export const LoginPage = () => {
               <button
                 data-test="login-submit"
                 type="submit"
-                className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center relative h-10"
               >
-                Sign in
+                {!isLoading && "Sign in"}
+                {isLoading && <Loader height="1.5rem" />}
               </button>
             </form>
           </div>
