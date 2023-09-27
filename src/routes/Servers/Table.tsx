@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 interface ITable<T> {
   data: T[];
@@ -15,32 +15,36 @@ export const Table = <T extends Record<string, unknown>>({ data }: ITable<T>) =>
 
   const keys = Object.keys(data[0]);
 
-  const sortedData = [...data];
+  const sortedData = useMemo(() => {
+    const updatedData = [...data];
 
-  if (sortConfig.key) {
-    sortedData.sort((a, b) => {
-      const aValue = Number(a[sortConfig.key as keyof T]);
-      const bValue = Number(b[sortConfig.key as keyof T]);
+    if (sortConfig.key) {
+      updatedData.sort((a, b) => {
+        const aValue = Number(a[sortConfig.key as keyof T]);
+        const bValue = Number(b[sortConfig.key as keyof T]);
 
-      if (!isNaN(aValue) && !isNaN(bValue)) {
-        if (sortConfig.direction === "asc") {
-          return aValue - bValue;
-        } else {
-          return bValue - aValue;
+        if (!isNaN(aValue) && !isNaN(bValue)) {
+          if (sortConfig.direction === "asc") {
+            return aValue - bValue;
+          } else {
+            return bValue - aValue;
+          }
         }
-      }
 
-      // If the values are not numbers, fallback to sorting as strings
-      const aString = a[sortConfig.key as keyof T] as string;
-      const bString = b[sortConfig.key as keyof T] as string;
+        // If the values are not numbers, fallback to sorting as strings
+        const aString = a[sortConfig.key as keyof T] as string;
+        const bString = b[sortConfig.key as keyof T] as string;
 
-      if (sortConfig.direction === "asc") {
-        return aString.localeCompare(bString);
-      } else {
-        return bString.localeCompare(aString);
-      }
-    });
-  }
+        if (sortConfig.direction === "asc") {
+          return aString.localeCompare(bString);
+        } else {
+          return bString.localeCompare(aString);
+        }
+      });
+    }
+
+    return updatedData;
+  }, []);
 
   const requestSort = (key: string | null) => {
     if (sortConfig.key === key) {
